@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: "<NOMBRE_DE_USUARIO>"
+  password: "<CONTRASEÑA>"
+
+development:
+  <<: *default
+  database: "<NOMBRE_DE_LA_BASE_DE_DATOS>"
+
+test:
+  <<: *default
+  database: "<NOMBRE_DE_LA_BASE_DE_DATOS>"
