@@ -10,6 +10,19 @@
 #   inflect.uncountable %w( fish sheep )
 # end
 
+ActiveSupport::Inflector.inflections('es-MX') do |inflect|
+  # Sistema
+  inflect.irregular 'usuario', 'usuarios'
+
+  # Finanzas
+  inflect.irregular 'transaccion', 'transacciones'
+  inflect.irregular 'deposito', 'depositos'
+  inflect.irregular 'retiro', 'retiros'
+  inflect.irregular 'transferencia', 'transferencias'
+  inflect.irregular 'comision', 'comisiones'
+  inflect.irregular 'cuenta_general', 'cuentas_generales'
+end
+
 # These inflection rules are supported but not enabled by default:
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
