@@ -34,5 +34,6 @@ module EwalletApi
     config.time_zone = 'Mexico City'
     config.available_locales = ['es-MX', :en]
     config.default_locale = :'es-MX'
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
