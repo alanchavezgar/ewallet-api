@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_10_013717) do
+ActiveRecord::Schema.define(version: 2018_08_10_224607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "finanzas_transacciones", force: :cascade do |t|
+    t.decimal "monto"
+    t.decimal "comision"
+    t.decimal "total"
+    t.string "numero_tarjeta"
+    t.string "receptor"
+    t.string "type", null: false
+    t.bigint "usuario_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_finanzas_transacciones_on_type"
+    t.index ["usuario_id"], name: "index_finanzas_transacciones_on_usuario_id"
+  end
 
   create_table "sistema_usuarios", force: :cascade do |t|
     t.string "nombre"

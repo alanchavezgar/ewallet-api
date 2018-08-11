@@ -25,6 +25,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
+  gem 'annotate'
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-annotate'
 end
 
 group :test do

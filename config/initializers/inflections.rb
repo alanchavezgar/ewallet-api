@@ -10,18 +10,22 @@
 #   inflect.uncountable %w( fish sheep )
 # end
 
-ActiveSupport::Inflector.inflections('es-MX') do |inflect|
+inflections = ->(inflect) {
   # Sistema
   inflect.irregular 'usuario', 'usuarios'
 
   # Finanzas
-  inflect.irregular 'transaccion', 'transacciones'
-  inflect.irregular 'deposito', 'depositos'
-  inflect.irregular 'retiro', 'retiros'
-  inflect.irregular 'transferencia', 'transferencias'
   inflect.irregular 'comision', 'comisiones'
   inflect.irregular 'cuenta_general', 'cuentas_generales'
-end
+  inflect.irregular 'deposito', 'depositos'
+  inflect.irregular 'retiro', 'retiros'
+  inflect.irregular 'transaccion', 'transacciones'
+  inflect.irregular 'transferencia', 'transferencias'
+}
+
+ActiveSupport::Inflector.inflections(:en, &inflections)
+
+ActiveSupport::Inflector.inflections('es-MX', &inflections)
 
 # These inflection rules are supported but not enabled by default:
 # ActiveSupport::Inflector.inflections(:en) do |inflect|

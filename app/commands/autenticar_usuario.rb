@@ -14,7 +14,7 @@ class AutenticarUsuario
 
   private
 
-  attr_accesor :email, :password
+  attr_accessor :email, :password
 
   def usuario
     usuario = Sistema::Usuario.find_by_email(email)
