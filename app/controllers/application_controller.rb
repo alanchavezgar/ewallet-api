@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::API
-  before_action :authenticate_request
+  include Response
+  include ExceptionHandler
+
+  before_action :autenticar_solicitud
+
   attr_reader :current_usuario
+
 
   private
 

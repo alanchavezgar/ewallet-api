@@ -1,5 +1,5 @@
 class AutenticacionController < ApplicationController
-  skip_before_action :authenticate_request
+  skip_before_action :autenticar_solicitud
 
   def autenticar
     command = AutenticarUsuario.call(params[:email], params[:password])

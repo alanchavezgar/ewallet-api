@@ -14,7 +14,7 @@ class AutorizarSolicitud
   attr_reader :headers
 
   def user
-    @user ||= Sistema::Usuario.find(decoded_auth_token[:user_id]) if decoded_auth_token
+    @user ||= Sistema::Usuario.find(decoded_auth_token[:usuario_id]) if decoded_auth_token
     @user || errors.add(:token, 'Token inválido') && nil
   end
 
