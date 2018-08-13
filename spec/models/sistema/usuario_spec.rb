@@ -43,10 +43,6 @@ RSpec.describe Sistema::Usuario, type: :model do
       should validate_presence_of(:password)
     end
 
-    it "valida la presencia del numero de cuenta" do
-      should validate_presence_of(:numero_cuenta)
-    end
-
     it "valida la unicidad del número de cuenta" do
       should validate_uniqueness_of(:numero_cuenta)
     end

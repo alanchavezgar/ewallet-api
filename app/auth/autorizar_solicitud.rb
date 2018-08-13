@@ -1,12 +1,13 @@
 class AutorizarSolicitud
-  prepend SimpleCommand
 
   def initialize(headers = {})
     @headers = headers
   end
 
   def call
-    user
+    {
+      usuario: user
+    }
   end
 
   private
@@ -15,7 +16,11 @@ class AutorizarSolicitud
 
   def user
     @user ||= Sistema::Usuario.find(decoded_auth_token[:usuario_id]) if decoded_auth_token
-    @user || errors.add(:token, 'Token inválido') && nil
+  rescue ActiveRecord::RecordNotFound => e
+    raise(
+      ExceptionHandler::InvalidToken,
+      ("#{Message.invalid_token} #{e.message}")
+    )
   end
 
   def decoded_auth_token
@@ -26,7 +31,7 @@ class AutorizarSolicitud
     if headers['Authorization'].present?
       return headers['Authorization'].split(' ').last
     else
-      errors.add(:token, 'No se encontró el token')
+      raise(ExceptionHandler::MissingToken, Message.missing_token)
     end
     nil
   end

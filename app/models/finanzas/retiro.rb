@@ -1,14 +1,5 @@
 class Finanzas::Retiro < Finanzas::Transaccion
-  after_create :descontar_a_usuario
-
   validates :numero_tarjeta, presence: true
-
-  private
-
-  def descontar_a_usuario
-    usuario = current_usuario
-    usuario.update(balance: usuario.balance - self.total)
-  end
 end
 
 # ## Schema Information

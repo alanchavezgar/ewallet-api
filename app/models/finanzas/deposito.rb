@@ -1,12 +1,5 @@
 class Finanzas::Deposito < Finanzas::Transaccion
-  after_create :depositar_a_usuario
-
-  private
-
-  def depositar_a_usuario
-    usuario = current_usuario
-    usuario.update(balance: usuario.balance + self.monto)
-  end
+  validates :numero_tarjeta, presence: true
 end
 
 # ## Schema Information

@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  post 'autenticar', to: 'autenticacion#autenticar'
+  post 'login', to: 'autenticacion#autenticar'
 
   namespace :sistema do
     post 'signup', to: 'usuarios#create'
+    get 'mi_cuenta', to: 'usuarios#show'
   end
 
-  namespace :finanzas do
-    resources :depositos, :retiros, :transferencias, only: [:index, :show, :create]
+  namespace :finanzas, only: [:index, :create] do
+    resources :depositos
+    resources :retiros
+    resources :transferencias
   end
 end

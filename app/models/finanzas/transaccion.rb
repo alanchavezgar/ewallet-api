@@ -1,11 +1,11 @@
 class Finanzas::Transaccion < ApplicationRecord
-  before_save :asignar_comision, :calcular_total
+  CUENTA_GENERAL = Rails.application.credentials.cuenta_general
 
-  after_save :depositar_a_cuenta_general
+  before_save :asignar_comision, :calcular_total
 
   belongs_to :usuario, class_name: "Sistema::Usuario"
 
-  validates :monto, :usuario, presence: true
+  validates :monto, presence: true
 
 
   private
@@ -29,11 +29,6 @@ class Finanzas::Transaccion < ApplicationRecord
 
   def calcular_total
     self.total = self.comision + self.monto
-  end
-
-  def depositar_a_cuenta_general
-    cuenta_general = Sistema::Usuario.find_by_numero_cuenta(Rails.application.credentials.cuenta_general)
-    cuenta_general.update(balance: cuenta_general.balance.to_f + self.comision)
   end
 end
 

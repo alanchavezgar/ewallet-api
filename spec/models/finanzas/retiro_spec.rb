@@ -38,14 +38,6 @@ RSpec.describe Finanzas::Retiro, type: :model do
       should validate_presence_of(:monto)
     end
 
-    it "valida la presencia de la comisión" do
-      should validate_presence_of(:comision)
-    end
-
-    it "valida la presencia del total" do
-      should validate_presence_of(:total)
-    end
-
     it "valida la presencia del usuario" do
       should validate_presence_of(:usuario)
     end

@@ -1,8 +1,5 @@
 # Regresa el usuario si las credenciales son correctas
-
 class AutenticarUsuario
-  prepend SimpleCommand
-
   def initialize(email, password)
     @email = email
     @password = password
@@ -14,13 +11,12 @@ class AutenticarUsuario
 
   private
 
-  attr_accessor :email, :password
+  attr_reader :email, :password
 
+  # Verifica las credenciales de usuario
   def usuario
-    usuario = Sistema::Usuario.find_by_email(email)
+    usuario = Sistema::Usuario.find_by(email: email)
     return usuario if usuario && usuario.authenticate(password)
-
-    errors.add :user_authentication, 'credenciales inválidas'
-    nil
+    raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
   end
 end

@@ -1,17 +1,18 @@
 # Implementación del estandar JWT (JSON Web Token)
-#
 class JsonWebToken
-  class << self
-    # Autenticación y generación del token del usuario
-    def encode(payload, exp = 24.hours.from_now)
-      payload[:exp] = exp.to_i
-      JWT.encode(payload, Rails.application.credentials.secret_key_base)
-    end
+  SECRET_KEY = Rails.application.credentials.secret_key_base
 
-    # Decodificación del token
-    def decode(token)
-      body = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
-      HashWithIndifferentAccess.new body
-    end
+  def self.encode(payload, exp = 24.hours.from_now)
+    payload[:exp] = exp.to_i
+    JWT.encode(payload, SECRET_KEY)
+  end
+
+  def self.decode(token)
+    body = JWT.decode(token, SECRET_KEY)[0]
+    HashWithIndifferentAccess.new body
+  rescue JWT::DecodeError => e
+    raise ExceptionHandler::InvalidToken, e.message
   end
 end
+
+
